@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Selection sort - AlgorithmVisualizer</title>
+    <meta content="AlgoVis is an online algorithm visualization tool." name="description" />
+    <meta content="algorithm visualization tool online" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/venobox/venobox.css" rel="stylesheet" />
+    <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css" />
+    <link rel="stylesheet" href="assets/css/cs.css">
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top header-inner-pages">
+        <div class="container-fluid d-flex">
+            <div class="contact-info mr-auto"></div>
+            
+        </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top header-inner-pages">
+        <div class="container-fluid d-flex align-items-center">
+            <a class="btn back-button mr-4" href="Projects.html"></i>
+          Back</a
+        >
+        <h1 class="logo mr-auto"><a href="index.html">AlgorithmVisualizer</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li><a href="C:\Users\Roshan\Desktop\algoviset\tobinatore.github.io\algovis\index.html">Home</a></li>
+                </ul>
+            </nav>
+            <!-- .nav-menu -->
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container-fluid">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sorting.html">Sorting</a></li>
+                    <li>Counting Sort</li>
+                </ol>
+                <h2>Counting sort visualization</h2>
+            </div>
+        </section>
+        
+
+
+        <div id="array"></div>
+        <br />
+        <br />
+    
+        <div id="count"></div>
+       
+    
+</body>
+
+<!-- linking index.js -->
+
+        <!-- End Breadcrumbs -->
+
+       
+    </main>
+    <!-- ======= Footer ======= -->
+    
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/venobox/venobox.min.js"></script>
+    <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script>
+      var container = document.getElementById("array");
+
+// Function to generate the array of blocks
+function generatearray() {
+for (var i = 0; i < 20; i++) {
+	// Return a value from 1 to 100 (both inclusive)
+	var value = Math.ceil(Math.random() * 20);
+
+	// Creating element div
+	var array_ele = document.createElement("div");
+
+	// Adding class 'block' to div
+	array_ele.classList.add("block");
+
+	// Adding style to div
+	array_ele.style.height = `${value * 13}px`;
+	array_ele.style.transform = `translate(${i * 30}px)`;
+
+	// Creating label element for displaying
+	// size of particular block
+	var array_ele_label = document.createElement("label");
+	array_ele_label.classList.add("block_id");
+	array_ele_label.innerText = value;
+
+	// Appending created elements to index.html
+	array_ele.appendChild(array_ele_label);
+	container.appendChild(array_ele);
+}
+}
+
+// Function to generate the frequency array
+var count_container = document.getElementById("count");
+function generate_freq() {
+for (var i = 0; i < 20; i++) {
+	// Creating element div
+	var array_ele2 = document.createElement("div");
+
+	// Adding class 'block2' to div
+	array_ele2.classList.add("block2");
+
+	// Adding style to div
+	array_ele2.style.height = `${20}px`;
+	array_ele2.style.transform = `translate(${i * 30}px)`;
+
+	// index of freq array
+	var array_ele_idx = document.createElement("label");
+	array_ele_idx.classList.add("block_id2");
+	array_ele_idx.innerText = i + 1;
+
+	//giving initial freq to all blocks as 0
+	var array_ele_label2 = document.createElement("label");
+	array_ele_label2.classList.add("block_id3");
+	array_ele_label2.innerText = 0;
+
+	// Appending created elements to index.html
+	array_ele2.appendChild(array_ele_label2);
+	array_ele2.appendChild(array_ele_idx);
+	count_container.appendChild(array_ele2);
+}
+}
+
+// Asynchronous CountingSort function
+async function CountingSort(delay = 250) {
+var blocks = document.querySelectorAll(".block");
+
+// To store frequency of every block
+for (var i = 0; i < blocks.length; i += 1) {
+	//To highlight the current traversed block
+	blocks[i].style.backgroundColor = "#FF4949";
+
+	//Extracting the value of current block
+	var value = Number(blocks[i].childNodes[0].innerHTML);
+
+	var freq_array = document.getElementsByClassName("block_id3");
+
+	freq_array[value - 1].innerText++;
+
+	// To wait for .1 sec
+	await new Promise((resolve) =>
+	setTimeout(() => {
+		resolve();
+	}, delay)
+	);
+
+	//Changing to previous color
+	blocks[i].style.backgroundColor = "#6b5b95";
+}
+
+//Sorting by using frequency array
+var idx = 0;
+for (var i = 0; i < blocks.length; i += 1) {
+	var freq = document.getElementsByClassName("block_id3");
+
+	var temp = Number(freq[i].innerText);
+
+	var freq_block = document.getElementsByClassName("block2");
+
+	//changing color of freq block
+	freq_block[i].style.backgroundColor = "#FF4949";
+
+	// To wait for .1 sec
+	await new Promise((resolve) =>
+	setTimeout(() => {
+		resolve();
+	}, 2 * delay)
+	);
+
+	if (temp == 0) {
+	//changing color of freq block to previous one
+	freq_block[i].style.backgroundColor = "darkgray";
+	continue;
+	}
+
+	var block_label = document.getElementsByClassName("block_id");
+
+	//sorting the block array
+	for (var j = 0; j < temp; j++) {
+	blocks[idx].style.height = `${(i + 1) * 13}px`;
+	block_label[idx].innerText = i + 1;
+	idx++;
+	}
+
+	//changing color of freq block to previous one
+	freq_block[i].style.backgroundColor = "darkgray";
+
+	// To wait for .1 sec
+	await new Promise((resolve) =>
+	setTimeout(() => {
+		resolve();
+	}, 2 * delay)
+	);
+}
+}
+
+// Calling generatearray function
+generatearray();
+
+// Calling generate_freq function
+generate_freq();
+
+// Calling CountingSort function
+CountingSort();
+
+    </script>
+
+  </body>
+</html>

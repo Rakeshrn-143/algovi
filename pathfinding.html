@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Pathfinding - Algorithm Visualizer</title>
+    <meta
+      content="AlgoVis is an online algorithm visualization tool."
+      name="description"
+    />
+    <meta content="algorithm visualization tool online" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/venobox/venobox.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/owl.carousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css"
+    />
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ======= Top Bar ======= -->
+    <div
+      id="topbar"
+      class="d-none d-lg-flex align-items-center fixed-top header-inner-pages"
+    >
+      <div class="container-fluid d-flex">
+        <div class="contact-info mr-auto"></div>
+      </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top header-inner-pages">
+      <div class="container-fluid d-flex align-items-center">
+        <a class="btn back-button mr-4" href="index.html#categories"> Back</a>
+        <h1 class="logo mr-auto">
+          <a href="index.html">Algorithm Visualizer</a>
+        </h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav class="nav-menu d-none d-lg-block">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+          </ul>
+        </nav>
+        <!-- .nav-menu -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+      <!-- ======= Breadcrumbs ======= -->
+      <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container-fluid">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Pathfinding</li>
+            <li class="algo"></li>
+          </ol>
+          <h2><span class="algo">Pathfinding</span> visualization</h2>
+        </div>
+      </section>
+      <!-- End Breadcrumbs -->
+
+      <section class="inner-page pt-2">
+        <div class="container-fluid">
+          <div class="mb-2">
+            <div class="row mx-auto">
+              <div class="col-sm-2 pl-0">
+                <div class="dropdown">
+                  <button
+                    class="btn btn-dark btn-block dropdown-toggle"
+                    type="button"
+                    id="dropdownAlgo"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Select an Algorithm
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownAlgo">
+                    <button
+                      class="dropdown-item"
+                      onclick="setAlgo(1)"
+                      type="button"
+                    >
+                      A*
+                    </button>
+                    <button
+                      class="dropdown-item"
+                      onclick="setAlgo(2)"
+                      type="button"
+                    >
+                      BFS
+                    </button>
+                    <button
+                      class="dropdown-item"
+                      onclick="setAlgo(3)"
+                      type="button"
+                    >
+                      DFS
+                    </button>
+                    <button
+                      class="dropdown-item"
+                      onclick="setAlgo(4)"
+                      type="button"
+                    >
+                      Dijkstra's algorithm
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="dropdown">
+                  <button
+                    class="btn btn-block btn-dark dropdown-toggle"
+                    type="button"
+                    id="dropdownGen"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Generate Maze
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownGen">
+                    <button
+                      class="dropdown-item"
+                      type="button"
+                      onclick='generateMaze("recDFS")'
+                    >
+                      Recursive DFS
+                    </button>
+                    <button
+                      class="dropdown-item"
+                      type="button"
+                      onclick='generateMaze("growing")'
+                    >
+                      Growing tree algorithm
+                    </button>
+                    <button
+                      class="dropdown-item"
+                      type="button"
+                      onclick='generateMaze("binTree")'
+                    >
+                      Binary tree generator
+                    </button>
+                    <button
+                      class="dropdown-item"
+                      type="button"
+                      onclick='generateMaze("side")'
+                    >
+                      Sidewinder algorithm
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <button
+                  class="btn btn-block btn-dark"
+                  id="btnClear"
+                  onclick="clearGrid()"
+                >
+                  Clear grid
+                </button>
+              </div>
+              <div class="col-sm-2">
+                <button
+                  class="btn btn-block btn-danger red"
+                  type="button"
+                  id="startPf"
+                  onclick="runAlgo()"
+                >
+                  Visualize Algorithm
+                </button>
+              </div>
+              <div class="col-sm-4 pr-0">
+                <div
+                  class="alert alert-success text-center my-0 py-2"
+                  role="alert"
+                  hidden
+                >
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="bx bx-check-circle"></i>
+                    </div>
+                    <div class="col-11">
+                      Algorithm always finds shortest path.
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="alert alert-warning text-center my-0 py-2"
+                  role="alert"
+                  hidden
+                >
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="bx bx-error-circle"></i>
+                    </div>
+                    <div class="col-11">
+                      Algorithm does not guarantee shortest path.
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="alert alert-danger my-0 py-2"
+                  id="algowarning"
+                  role="alert"
+                  hidden
+                >
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="bx bx-x-circle"></i>
+                    </div>
+                    <div class="col-11">Please select an algorithm first.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center mx-auto"></div>
+          <div id="grid"></div>
+          <hr data-content="Explanation" class="hr-text mb-3 mt-4" />
+          <div class="row mx-auto">
+            <div id="astar-expl" hidden>
+              <b>
+                A* is a weighted algorithm which always finds the shortest path.
+              </b>
+              <br /><br />
+              A* uses heuristics to find the destination faster. It starts from
+              a specific starting node of a graph, and aims to find a path to
+              the given goal node having the smallest cost. A* does this by
+              maintaining a tree of paths originating at the start node and
+              extending those paths one edge at a time until it reached the
+              destination. At each iteration of its main loop, A* needs to
+              determine which of its paths to extend. It does so based on the
+              cost of the path and an estimate of the cost required to extend
+              the path all the way to the goal, selecting the path which
+              minimizes the sum of the current cost and the estimated remaining
+              cost. <br />
+              A* terminates when the path it chooses to extend is a path from
+              start to goal or if there are no paths eligible to be extended.
+              <br /><br />
+              Dijkstra's algorithm can be viewed as a special case of A* without
+              a heuristics function.
+            </div>
+            <div id="bfs-expl" hidden>
+              <b>
+                Breadth-first search is an unweighted algorithm which always
+                finds the shortest path.
+              </b>
+              <br /><br />
+              Breadth-first search starts at the source node, and explores all
+              of the neighbor nodes at the present depth prior to moving on to
+              the nodes at the next depth level. It uses the opposite strategy
+              as depth-first search. <br /><br />
+              It works similar to Dijkstra's algorithm, the main difference
+              being that it only works with unweighted edges thus not taking
+              weights added by the user into consideration and treating them as
+              simple nodes. <br /><br />
+              An explanation of the algorithm can be found
+              <a href="bfs.html">here</a>.
+            </div>
+            <div id="dfs-expl" hidden>
+              <b>
+                Depth-first search is an unweighted algorithm which does not
+                always find the shortest path.
+              </b>
+              <br /><br />
+              Depth-first search starts at the source node and explores as far
+              as possible along each branch before backtracking. It is thus not
+              the best choice for pathfinding, as it's not guaranteed to find a
+              shortest path and may take a long time to find the destination
+              vertex. <br /><br />
+              An explanation of the algorithm can be found
+              <a href="dfs.html">here</a>.
+            </div>
+            <div id="dijkstra-expl" hidden>
+              <b>
+                Dijkstras algorithm is a weighted algorithm which always finds
+                the shortest path.
+              </b>
+              <br /><br />
+              The original algorithm Dijkstra created finds the shortest path
+              from a single starting point to a single target. This is the
+              variant I implemented here. Other variations of Dijkstra's
+              algorithm find the shortest path from the source node to every
+              other node in the graph, thus creating a shortest-path-tree.
+              <br /><br />
+              The principle behind Dijkstra's algorithm is best explained with
+              an example.<br /><br />
+              Suppose you're a pirate captain in the 1670's having a base on one
+              of the countless islands in an archipelago somewhere in the
+              carribean. You and your crew hid a treasure on another island far
+              away from your base. Of course you have a map of the archipelago
+              with all the ways to get from one island to another and the length
+              of these routes.<br />
+              Being a smart pirate you thought of a way to find the shortest
+              path between your location and the treasure.<br />
+              You start by marking the distance from your location to every
+              other island with infinity, because you don't know yet how far
+              they are from your base. Next you have a look at the islands you
+              can directly reach from your base and update their respective
+              distances. You do this by determining the sum of the distance
+              between an unvisited island and the value of the current island (0
+              because you're still in your base) and then relabeling the
+              unvisited island with the sum if it is less than the unvisited
+              island's current value, drawing an arrow from the current island
+              to the other one and erasing every other arrow pointing to that
+              island. After marking the current island as "done", you repeat
+              that process for the island closest to yours, once again finding
+              all islands you can reach from that specific island, updating
+              their values and drawing/erasing arrows. You sit the whole night
+              updating the map until you finally mark the treasure island as
+              done. <br />
+              Now finding the shortest path is done by simply tracing your way
+              back by following the arrows in reverse.
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="legend-toggle"
+            data-toggle="modal"
+            data-target="#legendModal"
+            style="border: none; background: none"
+          >
+            <i class="icofont-simple-left"></i>
+          </button>
+        </div>
+        <div
+          class="modal fade"
+          id="legendModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="legendModal"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-dialog-slideout modal-sm"
+            role="document"
+          >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Legend</h5>
+              </div>
+              <div class="modal-body">
+                <div class="row ml-2 mt-4 text-center w-100">
+                  <div
+                    class="mr-2"
+                    style="
+                      height: 25px;
+                      width: 25px;
+                      display: inline-block;
+                      background-color: #fff;
+                      border: 1px solid #222;
+                    "
+                  ></div>
+                  Empty
+                </div>
+                <div class="row ml-2 mt-4 text-center w-100">
+                  <div
+                    class="mr-2"
+                    style="
+                      height: 25px;
+                      width: 25px;
+                      display: inline-block;
+                      background-color: #b0b0b0;
+                    "
+                  ></div>
+                  Weight
+                </div>
+                <div class="row ml-2 mt-4 text-center w-100">
+                  <div
+                    class="mr-2"
+                    style="
+                      height: 25px;
+                      width: 25px;
+                      display: inline-block;
+                      background-color: #171717;
+                    "
+                  ></div>
+                  Wall
+                </div>
+                <div class="row ml-2 mt-4 text-center w-100">
+                  <img
+                    class="mr-2"
+                    src="assets/img/start.svg"
+                    style="width: 25px; height: 25px"
+                  />Start
+                </div>
+                <div class="row ml-2 mt-4 text-center">
+                  <img
+                    class="mr-2"
+                    src="assets/img/end.svg"
+                    style="width: 25px; height: 25px"
+                  />End
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!--<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>-->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/venobox/venobox.min.js"></script>
+    <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="assets/js/Pathfinding/astar_pf.js"></script>
+    <script src="assets/js/Pathfinding/bfs_pf.js"></script>
+    <script src="assets/js/Pathfinding/dfs_pf.js"></script>
+    <script src="assets/js/Pathfinding/dijkstra_pf.js"></script>
+    <script src="assets/js/Maze/recursive_dfs.js"></script>
+    <script src="assets/js/Maze/growing_tree.js"></script>
+    <script src="assets/js/Maze/binary_tree_generator.js"></script>
+    <script src="assets/js/Maze/sidewinder.js"></script>
+    <script src="assets/js/Pathfinding/pf_helpers.js"></script>
+    <script src="assets/js/Maze/maze_helpers.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <script>
+      var mouseDown = false;
+      var algo = 0;
+      var gridArr = [];
+      var startPos = { x: 0, y: 0 };
+      var endPos = { x: 0, y: 0 };
+
+      $(document)
+        .mousedown(function (e) {
+          mouseDown = true;
+        })
+        .mouseup(function (e) {
+          mouseDown = false;
+        })
+        .mouseleave(function (e) {
+          mouseDown = false;
+        });
+
+      function setAlgo(algorithm) {
+        switch (algorithm) {
+          case 1:
+            $("#dropdownAlgo").text("A*");
+            $("#startPf").text("Visualize A*");
+            $(".algo").html("A* algorithm");
+            document.title = "A* - AlgoVis.io";
+            $("#algowarning").prop("hidden", true);
+            $(".alert-success").prop("hidden", false);
+            $(".alert-warning").prop("hidden", true);
+            $("#astar-expl").prop("hidden", false);
+            $("#dfs-expl").prop("hidden", true);
+            $("#bfs-expl").prop("hidden", true);
+            $("#dijkstra-expl").prop("hidden", true);
+            algo = new AStar();
+            break;
+          case 2:
+            $("#dropdownAlgo").text("BFS");
+            $("#startPf").text("Visualize BFS");
+            $(".algo").html("Breadth-first search");
+            document.title = "Breadth-first search - AlgoVis.io";
+            $("#algowarning").prop("hidden", true);
+            $(".alert-success").prop("hidden", false);
+            $(".alert-warning").prop("hidden", true);
+            $("#dfs-expl").prop("hidden", true);
+            $("#astar-expl").prop("hidden", true);
+            $("#dijkstra-expl").prop("hidden", true);
+            $("#bfs-expl").prop("hidden", false);
+            algo = new BFS();
+            break;
+          case 3:
+            $("#dropdownAlgo").text("DFS");
+            $("#startPf").text("Visualize DFS");
+            $(".algo").html("Depth-first search");
+            document.title = "Depth-first search - AlgoVis.io";
+            $("#algowarning").prop("hidden", true);
+            $(".alert-success").prop("hidden", true);
+            $(".alert-warning").prop("hidden", false);
+            algo = new DFS();
+            $("#astar-expl").prop("hidden", true);
+            $("#bfs-expl").prop("hidden", true);
+            $("#dijkstra-expl").prop("hidden", true);
+            $("#dfs-expl").prop("hidden", false);
+            break;
+          case 4:
+            $("#dropdownAlgo").text("Dijkstra's algorithm");
+            $("#startPf").text("Visualize Dijkstra's");
+            $(".algo").html("Dijkstra's algorithm");
+            document.title = "Dijkstra's algorithm - AlgoVis.io";
+            $("#algowarning").prop("hidden", true);
+            $(".alert-success").prop("hidden", false);
+            $(".alert-warning").prop("hidden", true);
+            algo = new Dijkstras();
+            $("#astar-expl").prop("hidden", true);
+            $("#dfs-expl").prop("hidden", true);
+            $("#bfs-expl").prop("hidden", true);
+            $("#dijkstra-expl").prop("hidden", false);
+            break;
+          default:
+            $("#dropdownAlgo").text("A*");
+            $("#startPf").text("Visualize A*");
+            $(".algo").html("A* algorithm");
+            document.title = "A* - AlgoVis.io";
+            $("#algowarning").prop("hidden", true);
+            $(".alert-success").prop("hidden", false);
+            $(".alert-warning").prop("hidden", true);
+            $("#astar-expl").prop("hidden", false);
+            $("#dfs-expl").prop("hidden", true);
+            $("#bfs-expl").prop("hidden", true);
+            $("#dijkstra-expl").prop("hidden", true);
+            algo = new AStar();
+            break;
+        }
+      }
+
+      function gridData() {
+        var data = new Array();
+        var xpos = 1; // starting at (1,1) so the stroke gets rendered
+        var ypos = 1;
+        var width = 25;
+        var height = 25;
+        var click = 0;
+        var screenWidth = globalThis.screen.availWidth;
+        var screenHeight = globalThis.screen.availHeight;
+        var rows = Math.floor(globalThis.screen.availHeight / height) - 6;
+        var cols = Math.floor(globalThis.screen.availWidth / width) - 1;
+
+        for (var row = 0; row < rows; row++) {
+          data.push(new Array());
+          gridArr.push(new Array());
+          for (var column = 0; column < cols; column++) {
+            data[row].push({
+              x: xpos,
+              y: ypos,
+              width: width,
+              height: height,
+              click: click,
+              row: row,
+              col: column,
+              dist: Infinity,
+              fScore: Infinity,
+              predecessor: undefined,
+              type: "floor",
+              anim: false,
+              visited: false,
+            });
+
+            gridArr[row].push(1);
+
+            xpos += width;
+          }
+
+          xpos = 1;
+
+          ypos += height;
+        }
+        return data;
+      }
+
+      function getNearestMultiple(input, x) {
+        var out = Math.round(input / x);
+        return out == 0 && input > 0 ? (out + 1) * x : out * x;
+      }
+
+      function clamp(number, min, max) {
+        return Math.max(min, Math.min(number, max));
+      }
+
+      function dragged(d) {
+        var x = d3.event.x;
+        var y = d3.event.y;
+        var gridX = clamp(
+          getNearestMultiple(x, 25) + 1,
+          0,
+          (gridArr[0].length - 1) * 25
+        );
+        var gridY = clamp(
+          getNearestMultiple(y, 25) + 1,
+          0,
+          (gridArr.length - 1) * 25
+        );
+        if (d == "start") {
+          var newX = Math.round((gridX - 1) / 25);
+          var newY = Math.round((gridY - 1) / 25);
+          if (
+            (newX != endPos.x || newY != endPos.y) &&
+            gridData[newY][newX].type != "wall"
+          ) {
+            startPos.x = newX;
+            startPos.y = newY;
+            d3.select(this).attr("x", gridX).attr("y", gridY);
+          }
+        } else {
+          var newX = Math.round((gridX - 1) / 25);
+          var newY = Math.round((gridY - 1) / 25);
+          if (
+            (newX != startPos.x || newY != startPos.y) &&
+            gridData[newY][newX].type != "wall"
+          ) {
+            endPos.x = Math.round((gridX - 1) / 25);
+            endPos.y = Math.round((gridY - 1) / 25);
+            d3.select(this).attr("x", gridX).attr("y", gridY);
+          }
+        }
+      }
+
+      var gridData = gridData();
+
+      var drag = d3
+        .drag()
+        .subject(function () {
+          var t = d3.select(this);
+          return { x: t.attr("x"), y: t.attr("y") };
+        })
+        .on("drag", dragged);
+
+      var grid = d3
+        .select("#grid")
+        .append("svg")
+        .attr("width", globalThis.screen.availWidth)
+        .attr("height", globalThis.screen.availHeight - 6 * 25);
+
+      var row = grid
+        .selectAll(".row")
+        .data(gridData)
+        .enter()
+        .append("g")
+        .attr("id", function (d, i) {
+          return "row" + i;
+        });
+
+      var column = row
+        .selectAll(".square")
+        .data(function (d) {
+          return d;
+        })
+        .enter()
+        .append("rect")
+        .attr("class", "square")
+        .attr("id", function (d, i) {
+          return "node-" + d.row + "-" + d.col;
+        })
+        .attr("x", function (d) {
+          return d.x;
+        })
+        .attr("y", function (d) {
+          return d.y;
+        })
+        .attr("width", function (d) {
+          return d.width;
+        })
+        .attr("height", function (d) {
+          return d.height;
+        })
+        .attr("fill", "#fff")
+        .attr("stroke", "#222")
+        .on("mousedown", async function (d) {
+          var coords = this.id.replace(/^\D+/g, "").split("-");
+          var col = coords[1];
+          var row = coords[0];
+          mouseDown = true;
+          if (
+            (col != startPos.x || row != startPos.y) &&
+            (col != endPos.x || row != endPos.y)
+          ) {
+            d.click++;
+            if (d.click % 2 == 0) {
+              d3.select(this).transition().duration(400).attr("fill", "#fff");
+              d.type = "floor";
+            }
+            if (d.click % 2 == 1) {
+              d.anim = true;
+              d3.select(this)
+                .attr("x", d.x + 12.5)
+                .attr("y", d.y + 12.5)
+                .attr("height", 0)
+                .attr("width", 0)
+                .attr("fill", "#171717")
+                .transition()
+                .duration(150)
+                .attr("x", d.x)
+                .attr("y", d.y)
+                .attr("height", 25)
+                .attr("width", 25);
+              await timeout(155);
+              d.anim = false;
+              d.type = "wall";
+              console.log(gridData);
+            }
+          }
+        })
+        .on("dblclick", function (d) {
+          var coords = this.id.replace(/^\D+/g, "").split("-");
+          var col = coords[1];
+          var row = coords[0];
+          if (
+            (col != startPos.x || row != startPos.y) &&
+            (col != endPos.x || row != endPos.y)
+          ) {
+            d.click = 1;
+            d3.select(this).transition().duration(400).attr("fill", "#B0B0B0");
+            d.type = "weight";
+          }
+        })
+        .on("mouseenter", async function (d) {
+          var coords = this.id.replace(/^\D+/g, "").split("-");
+          var col = coords[1];
+          var row = coords[0];
+          if (
+            (col != startPos.x || row != startPos.y) &&
+            (col != endPos.x || row != endPos.y)
+          ) {
+            if (mouseDown && !d.anim) {
+              d.click++;
+              if (d.click % 2 == 0) {
+                d3.select(this).transition().duration(400).attr("fill", "#fff");
+                d.type = "floor";
+              }
+              if (d.click % 2 == 1) {
+                d.anim = true;
+                await colorBlock("#" + this.id, "#171717", 150, "fill");
+                setTimeout(() => {
+                  d.anim = false;
+                }, 300);
+
+                d.type = "wall";
+              }
+            }
+          }
+        });
+
+      var start = grid
+        .selectAll(".start")
+        .data(["start"])
+        .enter()
+        .append("image")
+        .attr("xlink:href", "assets/img/start.svg")
+        .attr("id", "start")
+        .attr("x", function () {
+          var col = Math.round(Math.random() * (gridArr[0].length - 1));
+          startPos.x = col;
+          return 25 * col;
+        })
+        .attr("y", function () {
+          var row = Math.round(Math.random() * (gridArr.length - 1));
+          startPos.y = row;
+          console.log("startPos: " + startPos.x + ", " + startPos.y);
+          return 25 * row;
+        })
+        .attr("width", 25)
+        .attr("height", 25)
+        .call(drag);
+
+      var end = grid
+        .selectAll(".start")
+        .data(["end"])
+        .enter()
+        .append("image")
+        .attr("id", "end")
+        .attr("xlink:href", "assets/img/end.svg")
+        .attr("x", function () {
+          var col = Math.round(Math.random() * (gridArr[0].length - 1));
+          endPos.x = col;
+          return 25 * col;
+        })
+        .attr("y", function () {
+          var row = Math.round(Math.random() * (gridArr.length - 1));
+          endPos.y = row;
+          console.log("endPos: " + endPos.x + ", " + endPos.y);
+          return 25 * row;
+        })
+        .attr("width", 25)
+        .attr("height", 25)
+        .call(drag);
+
+      async function timeout(delay) {
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            resolve();
+          }, delay)
+        );
+      }
+
+      async function colorBlock(block, color, delayDraw, delay, mode) {
+        return new Promise((resolve) => {
+          if (mode == "fill") {
+            var coords = block.replace(/^\D+/g, "").split("-");
+            var col = coords[1];
+            var row = coords[0];
+            d3.select(block)
+              .attr("x", gridData[row][col].x + 12.5)
+              .attr("y", gridData[row][col].y + 12.5)
+              .attr("height", 0)
+              .attr("width", 0)
+              .attr("fill", color)
+              .transition()
+              .duration(delayDraw)
+              .attr("x", gridData[row][col].x)
+              .attr("y", gridData[row][col].y)
+              .attr("height", 25)
+              .attr("width", 25);
+          } else {
+            d3.select(block)
+              .transition()
+              .duration(delayDraw)
+              .attr("fill", color);
+          }
+          setTimeout(() => {
+            resolve();
+          }, delay);
+        }, delay);
+      }
+
+      async function runAlgo() {
+        if (algo != 0) {
+          $("#algowarning").prop("hidden", true);
+          $("#startPf").prop("disabled", true);
+          $("#dropdownAlgo").prop("disabled", true);
+          $("#dropdownGen").prop("disabled", true);
+          $("#btnClear").prop("disabled", true);
+          await algo.run(gridData, startPos, endPos);
+          $("#startPf").prop("disabled", false);
+          $("#dropdownAlgo").prop("disabled", false);
+          $("#dropdownGen").prop("disabled", false);
+          $("#btnClear").prop("disabled", false);
+        } else {
+          $("#algowarning").prop("hidden", false);
+        }
+      }
+
+      function clearGrid() {
+        d3.selectAll(".square").transition().duration(500).attr("fill", "#fff");
+        for (let y = 0; y < gridData.length; y++) {
+          for (let x = 0; x < gridData[0].length; x++) {
+            gridData[y][x].type = "floor";
+          }
+        }
+      }
+
+      async function generateMaze(type) {
+        var mazeGen;
+        var cell = undefined;
+        switch (type) {
+          case "recDFS":
+            mazeGen = new RecursiveDFS();
+            cell = {
+              x: Math.round(Math.random() * gridData[0].length),
+              y: Math.round(Math.random() * gridData.length),
+            };
+            break;
+          case "growing":
+            mazeGen = new GrowingTree();
+            cell = {
+              x: Math.round(Math.random() * (gridData[0].length - 2)) + 1,
+              y: Math.round(Math.random() * (gridData.length - 2)) + 1,
+            };
+            let colEven = gridData[0].length % 2 == 0;
+            let rowEven = gridData.length % 2 == 0;
+
+            if (colEven) {
+              cell.x = cell.x % 2 == 0 ? cell.x : cell.x + 1;
+            } else {
+              cell.x = cell.x % 2 == 0 ? cell.x + 1 : cell.x;
+            }
+            if (rowEven) {
+              cell.y = cell.y % 2 == 0 ? cell.y : cell.y + 1;
+            } else {
+              cell.y = cell.y % 2 == 0 ? cell.y + 1 : cell.y;
+            }
+
+            break;
+          case "binTree":
+            mazeGen = new BinaryTreeGenerator();
+            break;
+          case "side":
+            mazeGen = new Sidewinder();
+            break;
+          default:
+            mazeGen = new RecursiveDFS();
+            cell = {
+              x: Math.round(Math.random() * gridData[0].length),
+              y: Math.round(Math.random() * gridData.length),
+            };
+            break;
+        }
+
+        $("#startPf").prop("disabled", true);
+        $("#dropdownAlgo").prop("disabled", true);
+        $("#dropdownGen").prop("disabled", true);
+        $("#btnClear").prop("disabled", true);
+
+        if (cell) {
+          await mazeGen.startMaze(cell);
+        } else {
+          await mazeGen.startMaze();
+        }
+
+        while (
+          gridData[startPos.y][startPos.x].type == "wall" ||
+          (startPos.x == endPos.x && startPos.y == endPos.y)
+        ) {
+          if (startPos.x > 0) {
+            startPos.x -= 1;
+            d3.select("#start").attr("x", startPos.x * 25);
+            continue;
+          }
+          if (startPos.x < gridData[0].length - 2) {
+            startPos.x += 1;
+            d3.select("#start").attr("x", startPos.x * 25);
+          }
+        }
+
+        while (
+          gridData[endPos.y][endPos.x].type == "wall" ||
+          (startPos.x == endPos.x && startPos.y == endPos.y)
+        ) {
+          if (endPos.x > 0) {
+            endPos.x -= 1;
+            d3.select("#end").attr("x", endPos.x * 25);
+            continue;
+          }
+          if (endPos.x < gridData[0].length - 2) {
+            endPos.x += 1;
+            d3.select("#end").attr("x", endPos.x * 25);
+          }
+        }
+
+        $("#startPf").prop("disabled", false);
+        $("#dropdownAlgo").prop("disabled", false);
+        $("#dropdownGen").prop("disabled", false);
+        $("#btnClear").prop("disabled", false);
+      }
+    </script>
+  </body>
+</html>
